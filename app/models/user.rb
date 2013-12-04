@@ -11,6 +11,9 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :email
   validates_uniqueness_of :sc_access_token
 
+  has_many :playlist_permissions
+  has_many :playlists, through: :playlist_permissions
+
 	def generate_token(column)
 		begin 
 			token = SecureRandom.urlsafe_base64
