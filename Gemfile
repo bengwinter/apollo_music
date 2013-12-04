@@ -6,6 +6,12 @@ gem 'rails', '4.0.0'
 # Use postgresql as the database for Active Record
 gem 'pg'
 
+# debugging
+gem 'pry-rails'
+
+# soundcloud gem
+gem 'soundcloud'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 
@@ -33,7 +39,9 @@ group :doc do
 end
 
 # Use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
+gem 'bcrypt-ruby', '~> 3.0.0'
+
+gem 'dotenv-rails'
 
 # Use unicorn as the app server
 # gem 'unicorn'

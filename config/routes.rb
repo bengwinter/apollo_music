@@ -1,4 +1,12 @@
 ApolloApp::Application.routes.draw do
+
+  root 'users#index'
+  get 'auth_user' => 'users#auth'
+  get 'authorize' => 'users#soundcloud_authorize', as: :authorize_soundcloud
+  post 'create_user' => 'users#create'
+
+  resources :users
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

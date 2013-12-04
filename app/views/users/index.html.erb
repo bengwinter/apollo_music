@@ -1,0 +1,5 @@
+<% if @current_user %>
+	<%= @current_user.email %>
+<% else %>
+	<%= link_to 'Register with SoundCloud', authorize_soundcloud_path %>
+<% end %> 
