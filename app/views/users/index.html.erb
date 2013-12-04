@@ -1,5 +1,41 @@
-<% if @current_user %>
-	<%= @current_user.email %>
-<% else %>
+Landing Page:<br/>
 	<%= link_to 'Register with SoundCloud', authorize_soundcloud_path %>
-<% end %> 
+
+<br/><br/>
+<% if current_user %>
+	Local Email: <%= current_user.email %>
+<br/>
+SoundCloud Username: <%= @user_client.get('/me').username %><br/>
+
+Followers: <%= @user_client.get('/me').followers_count %><br/>
+
+Following: <%= @user_client.get('/me').following_count %><br/>
+
+Full Name: <%= @user_client.get('/me').full_name %><br/>
+
+City: <%= @user_client.get('/me').city %><br/>
+
+Country: <%= @user_client.get('/me').country %><br/>
+
+Public Favorite Counts: <%= @user_client.get('/me').public_favorites_count %><br/>
+
+Currently Online? <%= @user_client.get('/me').online %><br/>
+
+Track Count: <%= @user_client.get('/me').track_count %><br/>
+
+Playlist Count: <%= @user_client.get('/me').playlist_count %><br/>
+
+Website: <%= @user_client.get('/me').website %><br/>
+
+Description: <%= @user_client.get('/me').description %><br/>
+
+API URI: <%= @user_client.get('/me').uri %><br/>
+<br/>
+
+<img src="<%= @user_client.get('/me').avatar_url %>"/>
+<br/>
+
+	<%= link_to 'Logout', destory_session_path %>
+
+
+<% end %>

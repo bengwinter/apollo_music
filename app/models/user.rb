@@ -11,13 +11,10 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :email
   validates_uniqueness_of :sc_access_token
 
-  def create
-  	binding.pry
-  end
-
 	def generate_token(column)
 		begin 
-			self[column] = SecureRandom.urlsafe_base64
+			token = SecureRandom.urlsafe_base64
+			self[column] = token
 		end while User.exists?(column => self[column])
 	end
 
@@ -30,8 +27,8 @@ class User < ActiveRecord::Base
 		end
 	end	
 
-	def self.authenticate(phone_number, password)
-		user = self.find_by_phone_number(phone_number)
+	def self.authenticate(email, password)
+		user = self.find_by_email(email)
 		if user && user.password_digest == ::BCrypt::Engine.hash_secret(password, user.password_salt)
 			user
 		else

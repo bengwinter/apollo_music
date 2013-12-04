@@ -9,6 +9,8 @@ class CreateUsers < ActiveRecord::Migration
       t.string :password_digest
       t.string :password_salt	
       t.string :sc_access_token
+      t.string :sc_expiration
+      t.string :sc_refresh_token
       t.string :auth_token
       t.timestamps
     end

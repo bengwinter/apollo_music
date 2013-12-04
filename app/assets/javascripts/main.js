@@ -3,11 +3,17 @@ $(document).ready(function(){
     e.preventDefault();
     var email = $('#email').val();
     var password = $('#password').val();
-    var code = $('#code').val();
+    var access_token = $('#access_token').val();
+    var expiration = $('#expiration').val();
+    var refresh_token = $('#refresh_token').val();
+
 
     $('#email').val('');
     $('#password').val('');
-    $('#code').val('');
+    $('#access_token').val('');
+    $('#expiration').val('');
+    $('#refresh_token').val('');
+
 
     // Make the Ajax call to create the new post. 
     // This ajax will evaluate as truthy, turning it back on for a normal submit
@@ -15,9 +21,9 @@ $(document).ready(function(){
       url: 'create_user',
       dataType: 'html',
       type: 'POST',
-      data: {email: email, password: password, sc_access_token: code},
+      data: {email: email, password: password, access_token: access_token, expiration: expiration, refresh_token: refresh_token},
       success: function(){
-        alert('fuck ben')
+        window.location.href = 'http://localhost:3000';
       }
     });
     // Return false so the value of this button isn't truthy, and doesn't submit
