@@ -9,28 +9,31 @@ class UsersController < ApplicationController
 	  end
 	end
 
-	def soundcloud_authorize
-		redirect_to SOUNDCLOUD_CLIENT.authorize_url()
-	end
-
-
 	def auth
-		@user = User.new
-		tokens = SOUNDCLOUD_CLIENT.exchange_token(:code => params[:code])
-		@access_token = tokens["access_token"]
-		@expiration = tokens["expires_in"]
-		@refresh_token = tokens["refresh_token"]
-		respond_to do |format|
-      format.html
-    end
+		sc_client = SoundCloud.new({
+			:client_id     => ENV['SOUNDCLOUD_CLIENT_ID'],
+			:client_secret => ENV['SOUNDCLOUD_CLIENT_SECRET'],
+			:redirect_uri  => 'http://localhost:3000/auth_user',
+		})
+		tokens = sc_client.exchange_token(:code => params[:code])
+		current_user.update(sc_access_token: tokens["access_token"])
+		current_user.update(sc_expiration: tokens["expires_in"])
+		current_user.update(sc_refresh_token: tokens["refresh_token"])
+		redirect_to root_url
 	end
 
 	def create
-		@user = User.create(email: params["email"], password: params["password"], sc_access_token: params[:access_token], sc_expiration: params[:expiration], sc_refresh_token: params[:refresh_token])
+		@user = User.create(email: params["email"], password: params["password"])
 		cookies.permanent[:auth_token] = @user.auth_token
+		sc_client = SoundCloud.new({
+			:client_id     => ENV['SOUNDCLOUD_CLIENT_ID'],
+			:client_secret => ENV['SOUNDCLOUD_CLIENT_SECRET'],
+			:redirect_uri  => 'http://localhost:3000/auth_user',
+		})
+		@url = sc_client.authorize_url()
 		respond_to do |format|
-      format.html
-    end	
+	     format.js {}
+	 	end
 	end
 
 

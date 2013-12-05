@@ -7,12 +7,12 @@ class User < ActiveRecord::Base
 	attr_accessor :password
   validates_presence_of :password, :on => :create
   validates_presence_of :email
-  validates_presence_of :sc_access_token
   validates_uniqueness_of :email
-  validates_uniqueness_of :sc_access_token
 
-  has_many :playlist_permissions
-  has_many :playlists, through: :playlist_permissions
+  # has_many :playlist_permissions
+  # has_many :playlists, through: :playlist_permissions
+	# after_create :first_playlists
+ 
 
 	def generate_token(column)
 		begin 
@@ -38,5 +38,14 @@ class User < ActiveRecord::Base
 			nil
 		end
 	end
+
+	# private 
+	
+ #  def first_playlists
+ #    self.playlists << Playlist.create(name: "All")
+ #    self.playlists << Playlist.create(name: "Favorites")
+ #    self.playlists << Playlist.create(name: "Shared")
+ #  end
+
 
 end
