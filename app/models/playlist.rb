@@ -4,7 +4,6 @@ class Playlist < ActiveRecord::Base
   has_many :playlist_orders
   has_many :songs, through: :playlist_orders
 
-  # validates :name, presence: true
-  # validates_uniqueness_of :name, scope: :user_id
+  validates :name, presence: true
 
 end

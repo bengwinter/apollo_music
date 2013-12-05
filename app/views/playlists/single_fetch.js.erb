@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-  var html = "<ul> <% @playlist.songs.each do |song| %><li><%= song.title %>,<%= song.artist %>,<%= song.url %></li><% end %></ul>"
+  var html = "<ul class='playlist-main-view' id='<%= @playlist.id %>'> <% @playlist.songs.each do |song| %><li><%= song.title %>,<%= song.artist %>,<%= song.url %></li><% end %></ul>"
   
   $('#main-container').append(html);
 });

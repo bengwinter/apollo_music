@@ -5,6 +5,7 @@ class CreateSongs < ActiveRecord::Migration
       t.text :artist, default: 'No Artist'
       t.text :url
       t.text :source, default: 'SoundCloud'
+      t.text :album
       t.integer :plays
       t.integer :shares
       t.integer :favorites

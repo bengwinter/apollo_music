@@ -7,4 +7,5 @@ ApolloApp::Application.routes.draw do
   get 'destroy_session' => 'sessions#destroy', as: :destory_session
   post 'create_playlist' => 'playlists#create'
   get 'single_playlist_fetch' => 'playlists#single_fetch'
+  post 'add_song' => 'songs#create'
 end

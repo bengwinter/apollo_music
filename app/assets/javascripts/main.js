@@ -54,4 +54,26 @@ $(document).ready(function(){
     });
     return false;
   });
+
+  $('#add-song').click(function(e){
+    e.preventDefault();
+    var playlist_id = $('#new-song-playlist-id').val();
+    var song_url = $('#new-song-url').val();
+    var song_title = $('#new-song-title').val();
+    var song_title = $('#new-song-artist').val();
+
+    $('#new-song-url').val('');
+    $('#new-song-playlist-id').val('');
+    $('#new-song-title').val('');
+    $('#new-song-artist').val('');
+
+    $.ajax({
+      url: 'add_song',
+      type: 'POST',
+      data: {playlist_id: playlist_id, song_url: song_url},
+      success: function(){
+      }
+    });
+    return false;
+  });
 });
