@@ -1,42 +1,48 @@
 <% if current_user %>
 	Local Email: <%= current_user.email %>
 <br/>
-SoundCloud Username: <%= @user_client.get('/me').username %><br/>
 
-Followers: <%= @user_client.get('/me').followers_count %><br/>
-
-Following: <%= @user_client.get('/me').following_count %><br/>
-
-Full Name: <%= @user_client.get('/me').full_name %><br/>
-
-City: <%= @user_client.get('/me').city %><br/>
-
-Country: <%= @user_client.get('/me').country %><br/>
-
-Public Favorite Counts: <%= @user_client.get('/me').public_favorites_count %><br/>
-
-Currently Online? <%= @user_client.get('/me').online %><br/>
-
-Track Count: <%= @user_client.get('/me').track_count %><br/>
-
-Playlist Count: <%= @user_client.get('/me').playlist_count %><br/>
-
-Website: <%= @user_client.get('/me').website %><br/>
-
-Description: <%= @user_client.get('/me').description %><br/>
-
-API URI: <%= @user_client.get('/me').uri %><br/>
 <br/>
 
-<img src="<%= @user_client.get('/me').avatar_url %>"/>
-<br/>
+Playlists:</br>
+<ul id="all-playlists">
+<% current_user.playlists.each do |playlist| %>
+<li class="single-playlist" id="<%= playlist.id %>"><%= playlist.name %></li>
+<% end %></ul>
+</br>
+<input type="text" id="new-playlist-name" placeholder="Untitled Playlist"></input>
+<button id="create-playlist">Create Playlist </button>
 
+
+<div id="main-container">
+</div>
+
+<input type='text' id='new-song-url' placeholder='Please insert a valid URL here'></input>
+<input type='text' id='new-song-playlist-id' placeholder='Playlist ID'></input>
+<input type='text' id='new-song-title' placeholder='Song Title'></input>
+<input type='text' id='new-song-artist' placeholder='Song Artist'></input>
+<input type='text' id='new-song-album' placeholder='Song Album'></input>
+<button id='add-song'>Add Song</button>
+
+<div id="favorite-songs-playlist">
+  <h3>Favorites Playlist</h3>
+  <ul id= '<%= current_user.playlists.find_by_name('Favorites').id %>'>
+  <% current_user.playlists.find_by_name('Favorites').playlist_orders.each do |order| %>
+  <li> <%= Song.find(order.song_id).title %> <button class='remove-song' id='<%= order.id %>'>Remove Song</button> </li>
+  <% end %>
+  </ul>
+</div>
+
+
+
+<br/>
 	<%= link_to 'Logout', destory_session_path %>
 
-<% end %>
 
+<% else %>
 <br/>
 <h1>Register for Apollo</h1>
 <label>Email:</label><input type="text" id="email" placeholder="email@example.com"></input><br/>
 <label>Password:</label><input type="password" id="password" placeholder="password"></input><br/>
 <button id="create_user_submit">Register</button>
+<% end %>

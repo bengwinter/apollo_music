@@ -45,13 +45,15 @@ ActiveRecord::Schema.define(version: 20131204230557) do
   end
 
   create_table "songs", force: true do |t|
-    t.text    "title",     default: "No Title"
-    t.text    "artist",    default: "No Artist"
+    t.text    "title",     default: "Untitled"
+    t.text    "artist",    default: "Untitled"
     t.text    "url"
     t.text    "source",    default: "SoundCloud"
+    t.text    "album",     default: "Untitled"
     t.integer "plays"
     t.integer "shares"
     t.integer "favorites"
+    t.text    "stream_id"
   end
 
   create_table "users", force: true do |t|
