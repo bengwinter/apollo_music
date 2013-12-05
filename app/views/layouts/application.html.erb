@@ -4,9 +4,22 @@
   <title>ApolloApp</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+	<script src="http://connect.soundcloud.com/sdk.js"></script>
   <%= csrf_meta_tags %>
 </head>
 <body>
+
+
+<script>
+  SC.initialize({
+    client_id: "bcca7c97882019aa3716e0c449377b73"
+  });
+
+  $(document).ready(function(){
+    SC.stream("/tracks/38290024", {autoPlay: true});
+  });
+</script>
+
 
 <%= yield %>
 
