@@ -45,14 +45,16 @@ ActiveRecord::Schema.define(version: 20131204230557) do
   end
 
   create_table "songs", force: true do |t|
-    t.text    "title",     default: "Untitled"
-    t.text    "artist",    default: "Untitled"
+    t.text    "title",             default: "Untitled"
+    t.text    "artist",            default: "Untitled"
     t.text    "url"
-    t.text    "source",    default: "SoundCloud"
-    t.text    "album",     default: "Untitled"
+    t.text    "source",            default: "SoundCloud"
+    t.text    "album",             default: "Untitled"
     t.integer "plays"
     t.integer "shares"
     t.integer "favorites"
+    t.string  "remote_creator_id"
+    t.string  "duration"
     t.text    "stream_id"
   end
 
@@ -68,7 +70,6 @@ ActiveRecord::Schema.define(version: 20131204230557) do
     t.string   "sc_expiration"
     t.string   "sc_refresh_token"
     t.string   "auth_token"
-    t.text     "favorites",        default: [],                                                                array: true
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -29,13 +29,10 @@ Playlists:</br>
   <ul id= '<%= current_user.playlists.find_by_name('Favorites').id %>'>
   <% current_user.playlists.find_by_name('Favorites').playlist_orders.each do |order| %>
   <li id='<%= order.id %>'>
-    <%= Song.find(order.song_id).title %> 
+    <button class='play-song' id='<%= Song.find(order.song_id).stream_id %>'>Play</button>
     <button class='remove-song'>Remove</button>
-    <% if current_user.favorites.include?(order.song_id.to_s) %>
       <button class='unfavorite-song'>Unfavorite</button>
-    <% else %>
       <button class='favorite-song'>Favorite</button>
-    <% end %>
   </li>
   <% end %>
   </ul>
