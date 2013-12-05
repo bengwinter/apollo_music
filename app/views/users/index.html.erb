@@ -21,7 +21,17 @@ Playlists:</br>
 <input type='text' id='new-song-playlist-id' placeholder='Playlist ID'></input>
 <input type='text' id='new-song-title' placeholder='Song Title'></input>
 <input type='text' id='new-song-artist' placeholder='Song Artist'></input>
+<input type='text' id='new-song-album' placeholder='Song Album'></input>
 <button id='add-song'>Add Song</button>
+
+<div id="favorite-songs-playlist">
+  <h3>Favorites Playlist</h3>
+  <ul id= '<%= current_user.playlists.find_by_name('Favorites').id %>'>
+  <% current_user.playlists.find_by_name('Favorites').playlist_orders.each do |order| %>
+  <li> <%= Song.find(order.song_id).title %> <button class='remove-song' id='<%= order.id %>'>Remove Song</button> </li>
+  <% end %>
+  </ul>
+</div>
 
 
 

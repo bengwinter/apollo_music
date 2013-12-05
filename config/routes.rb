@@ -8,4 +8,5 @@ ApolloApp::Application.routes.draw do
   post 'create_playlist' => 'playlists#create'
   get 'single_playlist_fetch' => 'playlists#single_fetch'
   post 'add_song' => 'songs#create'
+  post 'remove_song' => 'songs#remove'
 end
