@@ -16,9 +16,7 @@ class UsersController < ApplicationController
 			:redirect_uri  => 'http://localhost:3000/auth_user',
 		})
 		tokens = sc_client.exchange_token(:code => params[:code])
-		current_user.update(sc_access_token: tokens["access_token"])
-		current_user.update(sc_expiration: tokens["expires_in"])
-		current_user.update(sc_refresh_token: tokens["refresh_token"])
+		current_user.update(sc_access_token: tokens["access_token"], sc_expiration: tokens["expires_in"], sc_refresh_token: tokens["refresh_token"])
 		redirect_to root_url
 	end
 
