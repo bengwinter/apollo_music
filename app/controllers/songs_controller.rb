@@ -8,7 +8,7 @@ class SongsController < ApplicationController
       client = SoundCloud.new(:client_id => ENV['SOUNDCLOUD_CLIENT_ID'])
       track = client.get('/resolve', :url => "https://soundcloud.com/rostonni/steve-grand-all-american-boy")
       binding.pry
-      @song = Song.where(url: params["song_url"]).first_or_create(title: params["song_title"], album: params["song_album"], artist: params["song_artist"], duration:)
+      @song = Song.where(url: params["song_url"]).first_or_create(title: params["song_title"], album: params["song_album"], artist: params["song_artist"])
       @playlist.songs << @song
     end
     respond_to do |format|
@@ -25,11 +25,15 @@ class SongsController < ApplicationController
   end
 
   def favorite
-    favorites_array = current_user.favorites 
-    favorites_array << PlaylistOrder.find(params[:order_id]).song_id.to_s
-    favorites_array.uniq
-    current_user.update(favorites: favorites_array)
-    binding.pry
+    @song_id = PlaylistOrder.find(params["order_id"]).song_id
+    Favorite.where(user_id: current_user.id, song_id: @song_id).first_or_create
+    redirect_to root_url
+  end
+
+  def unfavorite
+    @song_id = PlaylistOrder.find(params["order_id"]).song_id
+    Favorite.where(user_id: current_user.id, song_id: @song_id).destroy_all
+    redirect_to root_url
   end
 
 

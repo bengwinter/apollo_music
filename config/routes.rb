@@ -10,4 +10,5 @@ ApolloApp::Application.routes.draw do
   post 'add_song' => 'songs#create'
   post 'remove_song' => 'songs#remove'
   post 'favorite_song' => 'songs#favorite'
+  post 'unfavorite_song' => 'songs#unfavorite'
 end

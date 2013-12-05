@@ -106,4 +106,18 @@ $(document).ready(function(){
     });
     return false;
   });
+
+  $('.unfavorite-song').click(function(e){
+    e.preventDefault();
+    var order_id = e.target.parentElement.id;
+
+    $.ajax({
+      url: 'unfavorite_song',
+      type: 'POST',
+      data: {order_id: order_id},
+      success: function(){
+      }
+    });
+    return false;
+  });
 });

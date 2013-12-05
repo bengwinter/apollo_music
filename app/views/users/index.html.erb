@@ -31,10 +31,10 @@ Playlists:</br>
   <li id='<%= order.id %>'>
     <%= Song.find(order.song_id).title %> 
     <button class='remove-song'>Remove</button>
-    <% if current_user.favorites.include?(order.song_id.to_s) %>
-      <button class='unfavorite-song'>Unfavorite</button>
-    <% else %>
+    <% if Favorite.where(user_id: current_user.id, song_id: Song.find(order.song_id).id) == [] %>
       <button class='favorite-song'>Favorite</button>
+    <% else %>
+      <button class='unfavorite-song'>Unfavorite</button>
     <% end %>
   </li>
   <% end %>

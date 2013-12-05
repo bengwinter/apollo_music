@@ -22,6 +22,11 @@ class Song < ActiveRecord::Base
   #   Song.decrement_counter(:favorites, song_id)
   # end
 
+  def favorites
+    song_id = self.id
+    return Favorite.where(song_id: song_id)
+  end
+
   def capitalize
     self.title = self.title.split(' ').map {|w| w.capitalize }.join(' ')
     self.artist = self.artist.split(' ').map {|w| w.capitalize }.join(' ')
