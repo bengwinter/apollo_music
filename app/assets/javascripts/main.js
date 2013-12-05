@@ -93,6 +93,22 @@ $(document).ready(function(){
     return false;
   });
 
+
+  $('.play-song').click(function(e){
+    e.preventDefault();
+    var stream_id = e.target.id;
+
+    SC.initialize({
+      client_id: "bcca7c97882019aa3716e0c449377b73"
+    });
+
+    var stream_url = "/tracks/" + stream_id
+    SC.stream(stream_url, {autoPlay: true});
+
+    return false;
+  });
+
+
   $('.favorite-song').click(function(e){
     e.preventDefault();
     var order_id = e.target.parentElement.id;

@@ -6,9 +6,8 @@ class SongsController < ApplicationController
     if current_user
       @playlist = Playlist.find(params["playlist_id"])
       client = SoundCloud.new(:client_id => ENV['SOUNDCLOUD_CLIENT_ID'])
-      track = client.get('/resolve', :url => "https://soundcloud.com/rostonni/steve-grand-all-american-boy")
-      binding.pry
-      @song = Song.where(url: params["song_url"]).first_or_create(title: params["song_title"], album: params["song_album"], artist: params["song_artist"])
+      track = client.get('/resolve', :url => params["song_url"])
+      @song = Song.where(url: params["song_url"]).first_or_create(title: params["song_title"], album: params["song_album"], artist: params["song_artist"], duration: track["duration"], stream_id: track["id"])
       @playlist.songs << @song
     end
     respond_to do |format|
