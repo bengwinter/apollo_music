@@ -9,6 +9,8 @@ class CreateSongs < ActiveRecord::Migration
       t.integer :plays
       t.integer :shares
       t.integer :favorites
+      t.string :remote_creator_id
+      t.string :duration
       t.text :stream_id
     end
   end
