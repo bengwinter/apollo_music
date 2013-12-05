@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   has_many :playlists, through: :playlist_permissions
 	after_create :first_playlists
 
+
 	def generate_token(column)
 		begin 
 			token = SecureRandom.urlsafe_base64

@@ -81,10 +81,24 @@ $(document).ready(function(){
 
   $('.remove-song').click(function(e){
     e.preventDefault();
-    var order_id = e.target.id;
+    var order_id = e.target.parentElement.id;
 
     $.ajax({
       url: 'remove_song',
+      type: 'POST',
+      data: {order_id: order_id},
+      success: function(){
+      }
+    });
+    return false;
+  });
+
+  $('.favorite-song').click(function(e){
+    e.preventDefault();
+    var order_id = e.target.parentElement.id;
+
+    $.ajax({
+      url: 'favorite_song',
       type: 'POST',
       data: {order_id: order_id},
       success: function(){

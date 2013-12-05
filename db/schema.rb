@@ -68,6 +68,7 @@ ActiveRecord::Schema.define(version: 20131204230557) do
     t.string   "sc_expiration"
     t.string   "sc_refresh_token"
     t.string   "auth_token"
+    t.text     "favorites",        default: [],                                                                array: true
     t.datetime "created_at"
     t.datetime "updated_at"
   end

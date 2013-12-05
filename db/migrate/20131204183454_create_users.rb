@@ -12,6 +12,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :sc_expiration
       t.string :sc_refresh_token
       t.string :auth_token
+      t.text :favorites, array: true, default: []
       t.timestamps
     end
   end
