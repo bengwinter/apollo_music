@@ -38,13 +38,13 @@ class User < ActiveRecord::Base
 		end
 	end
 
-	private 
+	# private 
 	
-  def first_playlists
-    self.playlists << Playlist.create(name: "All")
-    self.playlists << Playlist.create(name: "Favorites")
-    self.playlists << Playlist.create(name: "Shared")
-  end
+  # def first_playlists
+  #   self.playlists << Playlist.create(name: "All")
+  #   self.playlists << Playlist.create(name: "Favorites")
+  #   self.playlists << Playlist.create(name: "Shared")
+  # end
 
 
 end
