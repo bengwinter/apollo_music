@@ -40,6 +40,8 @@ gem 'bcrypt-ruby', '~> 3.0.0'
 
 gem 'dotenv-rails'
 
+gem 'rails_12factor'
+
 # Use unicorn as the app server
 # gem 'unicorn'
 
