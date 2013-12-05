@@ -5,5 +5,6 @@ ApolloApp::Application.routes.draw do
   post 'create_user' => 'users#create'
   resources :users
   get 'destroy_session' => 'sessions#destroy', as: :destory_session
-
+  post 'create_playlist' => 'playlists#create'
+  get 'single_playlist_fetch' => 'playlists#single_fetch'
 end

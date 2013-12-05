@@ -1,0 +1,28 @@
+SoundCloud Username: <%= @user_client.get('/me').username %><br/>
+
+Followers: <%= @user_client.get('/me').followers_count %><br/>
+
+Following: <%= @user_client.get('/me').following_count %><br/>
+
+Full Name: <%= @user_client.get('/me').full_name %><br/>
+
+City: <%= @user_client.get('/me').city %><br/>
+
+Country: <%= @user_client.get('/me').country %><br/>
+
+Public Favorite Counts: <%= @user_client.get('/me').public_favorites_count %><br/>
+
+Currently Online? <%= @user_client.get('/me').online %><br/>
+
+Track Count: <%= @user_client.get('/me').track_count %><br/>
+
+Playlist Count: <%= @user_client.get('/me').playlist_count %><br/>
+
+Website: <%= @user_client.get('/me').website %><br/>
+
+Description: <%= @user_client.get('/me').description %><br/>
+
+API URI: <%= @user_client.get('/me').uri %><br/>
+
+<img src="<%= @user_client.get('/me').avatar_url %>"/>
+<br/>

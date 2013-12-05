@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
 
   has_many :playlist_permissions
   has_many :playlists, through: :playlist_permissions
-	# after_create :first_playlists
+	after_create :first_playlists
 
 	def generate_token(column)
 		begin 
@@ -38,13 +38,13 @@ class User < ActiveRecord::Base
 		end
 	end
 
-	# private 
+	private 
 	
-  # def first_playlists
-  #   self.playlists << Playlist.create(name: "All")
-  #   self.playlists << Playlist.create(name: "Favorites")
-  #   self.playlists << Playlist.create(name: "Shared")
-  # end
+  def first_playlists
+    self.playlists << Playlist.create(name: "All")
+    self.playlists << Playlist.create(name: "Favorites")
+    self.playlists << Playlist.create(name: "Shared")
+  end
 
 
 end
