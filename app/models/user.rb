@@ -9,8 +9,8 @@ class User < ActiveRecord::Base
   validates_presence_of :email
   validates_uniqueness_of :email
 
-  # has_many :playlist_permissions
-  # has_many :playlists, through: :playlist_permissions
+  has_many :playlist_permissions
+  has_many :playlists, through: :playlist_permissions
 	# after_create :first_playlists
  
 
