@@ -12,6 +12,8 @@ class CreateSongs < ActiveRecord::Migration
       t.string :remote_creator_id
       t.string :duration
       t.text :stream_id
+      t.belongs_to :user
+      t.timestamps
     end
   end
 end

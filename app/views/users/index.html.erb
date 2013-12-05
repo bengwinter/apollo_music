@@ -19,10 +19,15 @@ Playlists:</br>
 
 <input type='text' id='new-song-url' placeholder='Please insert a valid URL here'></input>
 <input type='text' id='new-song-playlist-id' placeholder='Playlist ID'></input>
-<input type='text' id='new-song-title' placeholder='Song Title'></input>
-<input type='text' id='new-song-artist' placeholder='Song Artist'></input>
-<input type='text' id='new-song-album' placeholder='Song Album'></input>
+<button id='add-song-search'>Search</button>
+
+<input type='text' id='new-song-title' placeholder='Title'></input>
+<input type='text' id='new-song-artist' placeholder='Artist'></input>
+<input type='text' id='new-song-album' placeholder='Album'></input>
+<input type='text' id='new-song-genre' placeholder='Genre'></input>
 <button id='add-song'>Add Song</button>
+
+
 
 <div id="favorite-songs-playlist">
   <h3>Favorites Playlist</h3>
@@ -30,6 +35,7 @@ Playlists:</br>
   <% current_user.playlists.find_by_name('Favorites').playlist_orders.each do |order| %>
   <li id='<%= order.id %>'>
     <button class='play-song' id='<%= Song.find(order.song_id).stream_id %>'>Play</button>
+    <%= Song.find(order.song_id).title %>
     <button class='remove-song'>Remove</button>
     <% if Favorite.where(user_id: current_user.id, song_id: Song.find(order.song_id).id) == [] %>
       <button class='favorite-song'>Favorite</button>

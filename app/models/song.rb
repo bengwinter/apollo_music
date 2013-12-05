@@ -1,6 +1,7 @@
 class Song < ActiveRecord::Base
   has_many :playlist_orders
   has_many :playlists, through: :playlist_orders
+  belongs_to :user
   
   validates :url, presence: true
 

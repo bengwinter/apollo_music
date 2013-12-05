@@ -62,17 +62,19 @@ $(document).ready(function(){
     var song_title = $('#new-song-title').val();
     var song_artist = $('#new-song-artist').val();
     var song_album = $('#new-song-album').val();
+    var song_genre = $('#new-song-genre').val();
 
     $('#new-song-url').val('');
     $('#new-song-playlist-id').val('');
     $('#new-song-title').val('');
     $('#new-song-artist').val('');
     $('#new-song-album').val('');
+    $('#new-song-genre').val('');
 
     $.ajax({
       url: 'add_song',
       type: 'POST',
-      data: {playlist_id: playlist_id, song_url: song_url, song_title: song_title, song_album: song_album, song_artist: song_artist},
+      data: {playlist_id: playlist_id, song_url: song_url, song_title: song_title, song_album: song_album, song_artist: song_artist, song_genre: song_genre},
       success: function(){
       }
     });

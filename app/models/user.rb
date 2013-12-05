@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
 
   has_many :playlist_permissions
   has_many :playlists, through: :playlist_permissions
+  has_many :songs
 	after_create :first_playlists
 
 
