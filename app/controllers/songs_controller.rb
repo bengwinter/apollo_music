@@ -5,7 +5,10 @@ class SongsController < ApplicationController
   def create
     if current_user
       @playlist = Playlist.find(params["playlist_id"])
-      @song = Song.where(url: params["song_url"]).first_or_create(title: params["song_title"], album: params["song_album"], artist: params["song_artist"])
+      client = SoundCloud.new(:client_id => ENV['SOUNDCLOUD_CLIENT_ID'])
+      track = client.get('/resolve', :url => "https://soundcloud.com/rostonni/steve-grand-all-american-boy")
+      binding.pry
+      @song = Song.where(url: params["song_url"]).first_or_create(title: params["song_title"], album: params["song_album"], artist: params["song_artist"], duration:)
       @playlist.songs << @song
     end
     respond_to do |format|
