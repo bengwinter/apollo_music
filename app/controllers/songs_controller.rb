@@ -4,11 +4,21 @@ class SongsController < ApplicationController
 
   def create
     if current_user
-      @playlist = Playlist.find(params["playlist_id"])
-      client = SoundCloud.new(:client_id => ENV['SOUNDCLOUD_CLIENT_ID'])
-      track = client.get('/resolve', :url => params["song_url"])
-      @song = Song.where(url: params["song_url"], user_id: current_user.id).first_or_create(title: params["song_title"], album: params["song_album"], artist: params["song_artist"], duration: track["duration"], stream_id: track["id"], genre: params["song_genre"])
-      @playlist.songs << @song
+      if params["playlist_id"] == ""
+        @playlist = current_user.playlists.find_by_name("All")
+      else
+        @playlist = Playlist.find(params["playlist_id"])
+      end
+      if Song.where(url: params["song_url"]) == nil
+        client = SoundCloud.new(:client_id => ENV['SOUNDCLOUD_CLIENT_ID'])
+        track = client.get('/resolve', :url => params["song_url"])
+        binding.pry
+        @song = Song.where(url: params["song_url"], user_id: current_user.id).first_or_create(title: params["song_title"], album: params["song_album"], artist: params["song_artist"], duration: track["duration"], stream_id: track["id"], genre: params["song_genre"])
+        @playlist.songs << @song
+      else
+        @song = Song.where(url: params["song_url"]).first.dup.update(user_id: current_user.id)
+        @playlist.songs << @song
+      end
     end
     respond_to do |format|
         format.js
