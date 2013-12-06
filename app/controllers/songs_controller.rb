@@ -9,15 +9,19 @@ class SongsController < ApplicationController
       else
         @playlist = Playlist.find(params["playlist_id"])
       end
-      if Song.where(url: params["song_url"]) == nil
-        client = SoundCloud.new(:client_id => ENV['SOUNDCLOUD_CLIENT_ID'])
-        track = client.get('/resolve', :url => params["song_url"])
-        @song = Song.where(url: params["song_url"], user_id: current_user.id).first_or_create(title: params["song_title"], album: params["song_album"], artist: params["song_artist"], duration: track["duration"], stream_id: track["id"], genre: params["song_genre"], source_creator_id: track["user_id"], source_creator_username: track["user"]["username"], source_artwork: track["artwork_url"], source_play_count: track["playback_count"], source_download_count: track["download_count"], source_favorites_count: track["favoritings_count"], source_upload_date: track["created_at"], source_genre: track["genre"], source_title: track["title"])
-        @playlist.songs << @song
-      else
-        @song = Song.where(url: params["song_url"]).first.dup.update(user_id: current_user.id)
-        @playlist.songs << @song
-      end
+        if Song.where(url: params["song_url"], user_id: current_user.id) != []
+          @song = Song.where(url: params["song_url"], user_id: current_user.id).first
+          @playlist.songs << @song
+        elsif Song.where(url: params["song_url"]) != []
+          @x = Song.where(url: params["song_url"]).first
+          @song = current_user.songs.create(url: @x.url, title: @x.title, album: @x.album, artist: @x.artist, duration: @x.duration, stream_id: @x.stream_id, genre: @x.genre, source_creator_id: @x.source_creator_id, source_creator_username: @x.source_creator_username, source_artwork: @x.source_artwork, source_play_count: @x.source_play_count, source_download_count: @x.source_download_count, source_favorites_count: @x.source_favorites_count, source_upload_date: @x.source_upload_date, source_genre: @x.source_genre, source_title: @x.source_title)
+          @playlist.songs << @song
+        else
+          client = SoundCloud.new(:client_id => ENV['SOUNDCLOUD_CLIENT_ID'])
+          track = client.get('/resolve', :url => params["song_url"])
+          @song = current_user.songs.create(url: params["song_url"], title: params["song_title"], album: params["song_album"], artist: params["song_artist"], duration: track["duration"], stream_id: track["id"], genre: params["song_genre"], source_creator_id: track["user_id"], source_creator_username: track["user"]["username"], source_artwork: track["artwork_url"], source_play_count: track["playback_count"], source_download_count: track["download_count"], source_favorites_count: track["favoritings_count"], source_upload_date: track["created_at"], source_genre: track["genre"], source_title: track["title"])
+          @playlist.songs << @song
+        end
     end
     respond_to do |format|
         format.js
