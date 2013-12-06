@@ -38,13 +38,13 @@ class SongsController < ApplicationController
 
   def favorite
     @song_id = PlaylistOrder.find(params["order_id"]).song_id
-    Favorite.where(user_id: current_user.id, song_id: @song_id).first_or_create
+    Favorite.create(user_id: current_user.id, song_id: @song_id)
     redirect_to root_url
   end
 
   def unfavorite
     @song_id = PlaylistOrder.find(params["order_id"]).song_id
-    Favorite.where(user_id: current_user.id, song_id: @song_id).destroy_all
+    Favorite.where(user_id: current_user.id, song_id: @song_id).first.destroy
     redirect_to root_url
   end
 
