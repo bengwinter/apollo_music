@@ -1,11 +1,11 @@
 $(document).ready(function(){
   $('#create_user_submit').click(function(e){
     e.preventDefault();
-    var email = $('#email').val();
-    var password = $('#password').val();
+    var email = $('#email-register').val();
+    var password = $('#password-register').val();
 
-    $('#email').val('');
-    $('#password').val('');
+    $('#email-register').val('');
+    $('#password-register').val('');
 
 
     // Make the Ajax call to create the new post. 
@@ -14,6 +14,29 @@ $(document).ready(function(){
       url: 'create_user',
       dataType: 'script',
       type: 'POST',
+      data: {email: email, password: password},
+      success: function(){
+      }
+    });
+    // Return false so the value of this button isn't truthy, and doesn't submit
+    return false;
+  });
+
+  $('#user_login_submit').click(function(e){
+    e.preventDefault();
+    var email = $('#email-login').val();
+    var password = $('#password-login').val();
+
+    $('#email-login').val('');
+    $('#password-login').val('');
+
+
+    // Make the Ajax call to create the new post. 
+    // This ajax will evaluate as truthy, turning it back on for a normal submit
+    $.ajax({
+      url: 'login_user',
+      dataType: 'script',
+      type: 'GET',
       data: {email: email, password: password},
       success: function(){
       }
