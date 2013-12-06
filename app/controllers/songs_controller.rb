@@ -12,8 +12,7 @@ class SongsController < ApplicationController
       if Song.where(url: params["song_url"]) == nil
         client = SoundCloud.new(:client_id => ENV['SOUNDCLOUD_CLIENT_ID'])
         track = client.get('/resolve', :url => params["song_url"])
-        binding.pry
-        @song = Song.where(url: params["song_url"], user_id: current_user.id).first_or_create(title: params["song_title"], album: params["song_album"], artist: params["song_artist"], duration: track["duration"], stream_id: track["id"], genre: params["song_genre"])
+        @song = Song.where(url: params["song_url"], user_id: current_user.id).first_or_create(title: params["song_title"], album: params["song_album"], artist: params["song_artist"], duration: track["duration"], stream_id: track["id"], genre: params["song_genre"], source_creator_id: track["user_id"], source_creator_username: track["user"]["username"], source_artwork: track["artwork_url"], source_play_count: track["playback_count"], source_download_count: track["download_count"], source_favorites_count: track["favoritings_count"], source_upload_date: track["created_at"], source_genre: track["genre"], source_title: track["title"])
         @playlist.songs << @song
       else
         @song = Song.where(url: params["song_url"]).first.dup.update(user_id: current_user.id)
